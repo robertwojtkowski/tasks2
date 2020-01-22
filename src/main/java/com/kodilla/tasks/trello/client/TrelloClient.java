@@ -1,5 +1,7 @@
 package com.kodilla.tasks.trello.client;
 import com.kodilla.tasks.config.TrelloConfig;
+import com.kodilla.tasks.domain.CreatedTrelloCard;
+import com.kodilla.tasks.domain.TrelloCardDto;
 import org.springframework.web.client.RestTemplate;
 import com.kodilla.tasks.domain.TrelloBoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,21 @@ public class TrelloClient {
             System.out.println(e.getMessage());
             return new ArrayList<>();
         }
+    }
+
+    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("name", trelloCardDto.getName())
+                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("pos", trelloCardDto.getPos())
+                .queryParam("idList", trelloCardDto.getListId())
+                .build().encode().toUri();
+        System.out.println(url);
+
+        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 
 }
