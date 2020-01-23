@@ -15,9 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class TrelloClient {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
     @Value("${trello.api.endpoint.prod}")
     private String trelloApiEndpoint;
@@ -50,7 +53,7 @@ public class TrelloClient {
             TrelloBoardDto[] boardsResponse = restTemplate.getForObject(getUrl(), TrelloBoardDto[].class);
             return Arrays.asList(Optional.ofNullable(boardsResponse).orElse(someArray));
         } catch (RestClientException e) {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
             return new ArrayList<>();
         }
     }
