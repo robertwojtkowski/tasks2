@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My welcome page</title>
+</head>
+<body>
+<h1>First impression of my page</h1>
+<span th:text="${variable}"></span>
+<br>
+<table style="width:100%">
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td th:text="${two}"></td>
+        <td>*</td>
+        <td th:text="${two}"></td>
+        <td>=</td>
+        <td th:text="${two}*${two}"></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td th:text="${two}"></td>
+        <td>*</td>
+        <td th:text="${two}"></td>
+        <td>+</td>
+        <td th:text="${two}"></td>
+        <td>=</td>
+        <td th:text="${two}*${two}+${two}">
+    </tr>
+
+    <tr>
+        <td th:text="${two}"></td>
+        <td>-</td>
+        <td th:text="${two}"></td>
+        <td>*</td>
+        <td th:text="${two}"></td>
+        <td>=</td>
+        <td th:text="${two}-${two}+${two}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
